@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-update",
+  "name": "@galexrt/nuxt-update",
   "version": "1.0.0",
   "description": "Nuxt module: detect app update",
   "author": "Ilya Semenov",
