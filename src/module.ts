@@ -43,7 +43,7 @@ export default defineNuxtModule<ModuleOptions>({
     const { resolve } = createResolver(import.meta.url)
     nuxt.options.runtimeConfig.public.update = defu(
       nuxt.options.runtimeConfig.public.update,
-      options
+      options,
     )
     addPlugin({ src: resolve("./runtime/plugin"), mode: "client" })
     addServerHandler({

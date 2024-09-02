@@ -26,7 +26,7 @@ export default defineNuxtPlugin(({ $config }) => {
   } else {
     if (process.env.NODE_ENV !== "development") {
       console.warn(
-        "nuxt-update will not check for updates because app version not set."
+        "nuxt-update will not check for updates because app version not set.",
       )
     }
   }

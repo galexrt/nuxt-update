@@ -10,7 +10,7 @@ export default fromNodeMiddleware(
     res.setHeader("Content-Type", "application/json")
     res.setHeader("Cache-Control", "no-cache")
     res.end(JSON.stringify({ version }))
-  }
+  },
 )
 
 function get_version() {
