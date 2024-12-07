@@ -1,6 +1,6 @@
 {
   "name": "@galexrt/nuxt-update",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nuxt module: detect app update",
   "author": "Ilya Semenov",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "dist"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "husky",
     "prepack": "nuxt-module-build",
     "dev": "nuxi dev playground",
     "dev:build": "nuxi build playground",
@@ -28,26 +28,26 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@nuxt/kit": "3.13.0",
+    "@nuxt/kit": "3.14.1592",
     "defu": "6.1.4",
     "mitt": "3.0.1"
   },
   "devDependencies": {
-    "@changesets/cli": "2.27.7",
-    "@nuxt/eslint-config": "0.5.5",
-    "@nuxt/module-builder": "0.8.3",
-    "@nuxt/schema": "3.13.0",
-    "@nuxt/test-utils": "3.14.1",
-    "@types/node": "22.5.2",
-    "eslint": "9.9.1",
+    "@changesets/cli": "2.27.10",
+    "@nuxt/eslint-config": "0.7.2",
+    "@nuxt/module-builder": "0.8.4",
+    "@nuxt/schema": "3.14.1592",
+    "@nuxt/test-utils": "3.15.1",
+    "@types/node": "22.10.1",
+    "eslint": "9.16.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-simple-import-sort": "12.1.1",
-    "husky": "9.1.5",
+    "husky": "9.1.7",
     "lint-staged": "15.2.10",
-    "nuxt": "3.13.0",
-    "prettier": "^3.3.3",
-    "vitest": "2.0.5"
+    "nuxt": "3.14.1592",
+    "prettier": "^3.4.2",
+    "vitest": "2.1.8"
   },
-  "packageManager": "pnpm@9.9.0"
+  "packageManager": "pnpm@9.15.0"
 }
