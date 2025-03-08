@@ -1,17 +1,15 @@
-import { IncomingMessage, ServerResponse } from "node:http"
+import type { IncomingMessage, ServerResponse } from "node:http"
 
 import { fromNodeMiddleware } from "h3"
 
 const version = get_version()
 
-export default fromNodeMiddleware(
-  (req: IncomingMessage, res: ServerResponse) => {
-    res.statusCode = 200
-    res.setHeader("Content-Type", "application/json")
-    res.setHeader("Cache-Control", "no-cache")
-    res.end(JSON.stringify({ version }))
-  },
-)
+export default fromNodeMiddleware((_: IncomingMessage, res: ServerResponse) => {
+  res.statusCode = 200
+  res.setHeader("Content-Type", "application/json")
+  res.setHeader("Cache-Control", "no-cache")
+  res.end(JSON.stringify({ version }))
+})
 
 function get_version() {
   // Poor man replica of Nuxt env parser.
