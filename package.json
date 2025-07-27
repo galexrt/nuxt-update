@@ -1,19 +1,19 @@
 {
   "name": "@galexrt/nuxt-update",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Nuxt module: detect app update",
   "author": "Ilya Semenov",
   "license": "MIT",
   "type": "module",
   "exports": {
     ".": {
-      "types": "./dist/types.d.ts",
+      "types": "./dist/types.d.mts",
       "import": "./dist/module.mjs",
-      "require": "./dist/module.cjs"
+      "require": "./dist/module.mjs"
     }
   },
-  "main": "./dist/module.cjs",
-  "types": "./dist/types.d.ts",
+  "main": "./dist/module.mjs",
+  "types": "./dist/types.d.mts",
   "files": [
     "dist"
   ],
@@ -28,26 +28,26 @@
     "test:watch": "vitest watch"
   },
   "dependencies": {
-    "@nuxt/kit": "3.16.0",
+    "@nuxt/kit": "4.0.1",
     "defu": "6.1.4",
     "mitt": "3.0.1"
   },
   "devDependencies": {
-    "@changesets/cli": "2.28.1",
-    "@nuxt/eslint-config": "1.2.0",
-    "@nuxt/module-builder": "0.8.4",
-    "@nuxt/schema": "3.16.0",
-    "@nuxt/test-utils": "3.17.1",
-    "@types/node": "22.13.10",
-    "eslint": "9.22.0",
-    "eslint-config-prettier": "10.1.1",
-    "eslint-plugin-prettier": "5.2.3",
+    "@changesets/cli": "2.29.5",
+    "@nuxt/eslint-config": "1.7.1",
+    "@nuxt/module-builder": "1.0.2",
+    "@nuxt/schema": "4.0.1",
+    "@nuxt/test-utils": "3.19.2",
+    "@types/node": "24.1.0",
+    "eslint": "9.32.0",
+    "eslint-config-prettier": "10.1.8",
+    "eslint-plugin-prettier": "5.5.3",
     "eslint-plugin-simple-import-sort": "12.1.1",
     "husky": "9.1.7",
-    "lint-staged": "15.4.3",
-    "nuxt": "3.16.0",
-    "prettier": "3.5.3",
-    "vitest": "3.0.8"
+    "lint-staged": "16.1.2",
+    "nuxt": "4.0.1",
+    "prettier": "3.6.2",
+    "vitest": "3.2.4"
   },
   "packageManager": "pnpm@9.15.0"
 }
