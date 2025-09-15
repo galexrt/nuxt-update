@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import EventEmitter from "mitt"
 import { defineNuxtPlugin, useRouter } from "nuxt/app"
 
 export default defineNuxtPlugin(({ $config }) => {
   const options = $config.public.update
   const events = EventEmitter<{
-    check: void
+    check: any
     version: any
     update: any
   }>()
