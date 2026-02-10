@@ -49,7 +49,7 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTypeTemplate({
       filename: "types/nuxt-update.d.ts",
-      src: resolve("./types/nuxt-hooks.d.ts"),
+      src: resolve("./runtime/nuxt-hooks.d.ts"),
     })
 
     addPlugin({ src: resolve("./runtime/plugin"), mode: "client" })
