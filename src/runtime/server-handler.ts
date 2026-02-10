@@ -2,6 +2,8 @@ import type { IncomingMessage, ServerResponse } from "node:http"
 
 import { fromNodeMiddleware } from "h3"
 
+import { useRuntimeConfig } from "#imports"
+
 const version = getVersion()
 
 export default fromNodeMiddleware((_: IncomingMessage, res: ServerResponse) => {
