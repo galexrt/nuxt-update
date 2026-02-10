@@ -40,7 +40,7 @@ export default defineNuxtModule<ModuleOptions>({
     version: null,
   },
   async setup(options, nuxt) {
-    const { resolve } = createResolver(import.meta.url)
+    const resolver = createResolver(import.meta.url)
 
     nuxt.options.runtimeConfig.public.update = {
       ...nuxt.options.runtimeConfig.public.update,
@@ -49,13 +49,13 @@ export default defineNuxtModule<ModuleOptions>({
 
     addTypeTemplate({
       filename: "types/nuxt-update.d.ts",
-      src: resolve("./runtime/nuxt-hooks.d.ts"),
+      src: resolver.resolve("./runtime/nuxt-hooks.d.ts"),
     })
 
-    addPlugin({ src: resolve("./runtime/plugin"), mode: "client" })
+    addPlugin({ src: resolver.resolve("./runtime/plugin"), mode: "client" })
     addServerHandler({
       route: options.path,
-      handler: resolve("./runtime/server-handler"),
+      handler: resolver.resolve("./runtime/server-handler"),
     })
   },
 })
