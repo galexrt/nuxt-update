@@ -7,9 +7,7 @@ import {
 import type { HookResult } from "@nuxt/schema"
 
 export interface ModuleRuntimeHooks {
-  "custom:update_check:check": () => HookResult
-  "custom:update_check:version": (version: unknown) => HookResult
-  "custom:update_check:update": (version: unknown) => HookResult
+  "updateCheck:update": (version: unknown) => HookResult
 }
 
 export interface ModuleOptions {

@@ -23,18 +23,15 @@ export default defineNuxtPlugin({
 
       // Update last check time
       lastCheckTime = new Date()
-      nuxtApp.callHook("custom:update_check:check")
 
       try {
         const version = await retrieveRemoteVersion(options.path)
-        nuxtApp.callHook("custom:update_check:version", version)
-
         if (version !== options.version) {
-          // Remove the hook when an update is detected
+          // Remove the hook when an update is detected, no point in checking again.
           unregister()
 
           options.version = version
-          nuxtApp.callHook("custom:update_check:update", version)
+          nuxtApp.callHook("updateCheck:update", version)
         }
       } catch (err) {
         console.error("Failed to check for updates:", err)

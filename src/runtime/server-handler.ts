@@ -10,7 +10,11 @@ export default fromNodeMiddleware((_: IncomingMessage, res: ServerResponse) => {
   res.statusCode = 200
   res.setHeader("Content-Type", "application/json")
   res.setHeader("Cache-Control", "no-cache")
-  res.end(JSON.stringify({ version }))
+  res.end(
+    JSON.stringify({
+      version: version,
+    }),
+  )
 })
 
 function getVersion() {
