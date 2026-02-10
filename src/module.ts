@@ -1,6 +1,7 @@
 import {
   addPlugin,
   addServerHandler,
+  addTypeTemplate,
   createResolver,
   defineNuxtModule,
 } from "@nuxt/kit"
@@ -45,6 +46,11 @@ export default defineNuxtModule<ModuleOptions>({
       ...nuxt.options.runtimeConfig.public.update,
       ...options,
     }
+
+    addTypeTemplate({
+      filename: "types/nuxt-update.d.ts",
+      src: resolve("./types/nuxt-hooks.d.ts"),
+    })
 
     addPlugin({ src: resolve("./runtime/plugin"), mode: "client" })
     addServerHandler({
