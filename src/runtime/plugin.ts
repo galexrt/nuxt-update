@@ -1,61 +1,59 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import EventEmitter from "mitt"
 import { defineNuxtPlugin, useRouter } from "nuxt/app"
 
-export default defineNuxtPlugin(({ $config }) => {
-  const options = $config.public.update
-  const events = EventEmitter<{
-    check: any
-    version: any
-    update: any
-  }>()
-  if (options.version) {
-    let last_check_time = new Date()
-    useRouter().afterEach(async () => {
-      const last_check_interval = +new Date() - +last_check_time
-      if (last_check_interval >= options.checkInterval * 1000) {
-        last_check_time = new Date()
-        events.emit("check")
-        const version = await get_remote_version(options.path)
-        events.emit("version", version)
+export default defineNuxtPlugin({
+  name: "nuxt-update",
+
+  async setup(nuxtApp) {
+    const options = nuxtApp.$config.public.update
+    if (!options.version) {
+      if (process.env.NODE_ENV !== "development") {
+        console.warn(
+          "nuxt-update will not check for updates because app version not set.",
+        )
+      }
+      return
+    }
+
+    let lastCheckTime = new Date()
+    const unregister = useRouter().afterEach(async () => {
+      const last_check_interval = +new Date() - +lastCheckTime
+      if (last_check_interval < options.checkInterval * 1000) {
+        return
+      }
+
+      // Update last check time
+      lastCheckTime = new Date()
+      nuxtApp.callHook("custom:update_check:check")
+
+      try {
+        const version = await retrieveRemoteVersion(options.path)
+        nuxtApp.callHook("custom:update_check:version", version)
+
         if (version !== options.version) {
+          // Remove the hook when an update is detected
+          unregister()
+
           options.version = version
-          events.emit("update", version)
+          nuxtApp.callHook("custom:update_check:update", version)
         }
+      } catch (err) {
+        console.error("Failed to check for updates:", err)
       }
     })
-  } else {
-    if (process.env.NODE_ENV !== "development") {
-      console.warn(
-        "nuxt-update will not check for updates because app version not set.",
-      )
-    }
-  }
-  return {
-    provide: { update: events },
-  }
+  },
 })
 
-function get_remote_version(path: string) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest()
-    xhr.open("GET", path)
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        try {
-          const { version } = JSON.parse(xhr.responseText)
-          if (version) {
-            resolve(version)
-          } else {
-            reject("Malformed version response.")
-          }
-        } catch (err) {
-          reject(err)
-        }
-      } else {
-        reject("Request failed.")
-      }
+async function retrieveRemoteVersion(path: string) {
+  try {
+    const data = await $fetch<{ version?: string }>(path)
+    if (data?.version) {
+      return data.version
     }
-    xhr.send()
-  })
+    throw new Error("Malformed version response.")
+  } catch (err) {
+    if (err instanceof Error && err.message === "Malformed version response.") {
+      throw err
+    }
+    throw new Error("Request failed.")
+  }
 }

@@ -2,7 +2,7 @@ import type { IncomingMessage, ServerResponse } from "node:http"
 
 import { fromNodeMiddleware } from "h3"
 
-const version = get_version()
+const version = getVersion()
 
 export default fromNodeMiddleware((_: IncomingMessage, res: ServerResponse) => {
   res.statusCode = 200
@@ -11,10 +11,7 @@ export default fromNodeMiddleware((_: IncomingMessage, res: ServerResponse) => {
   res.end(JSON.stringify({ version }))
 })
 
-function get_version() {
-  // Poor man replica of Nuxt env parser.
-  // TODO: Learn how to access the actual runtime config from here.
-  const str = process.env.NUXT_PUBLIC_UPDATE_VERSION
-  const num = Number(str)
-  return Number.isFinite(num) ? num : str
+function getVersion() {
+  const config = useRuntimeConfig()
+  return config.public.update?.version ?? null
 }

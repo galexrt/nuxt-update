@@ -4,7 +4,6 @@ import {
   createResolver,
   defineNuxtModule,
 } from "@nuxt/kit"
-import { defu } from "defu"
 
 export interface ModuleOptions {
   /**
@@ -41,10 +40,12 @@ export default defineNuxtModule<ModuleOptions>({
   },
   async setup(options, nuxt) {
     const { resolve } = createResolver(import.meta.url)
-    nuxt.options.runtimeConfig.public.update = defu(
-      nuxt.options.runtimeConfig.public.update,
-      options,
-    )
+
+    nuxt.options.runtimeConfig.public.update = {
+      ...nuxt.options.runtimeConfig.public.update,
+      ...options,
+    }
+
     addPlugin({ src: resolve("./runtime/plugin"), mode: "client" })
     addServerHandler({
       route: options.path,
