@@ -31,7 +31,7 @@ export default defineNuxtPlugin({
           unregister()
 
           options.version = version
-          nuxtApp.callHook("updateCheck:update", version)
+          nuxtApp.callHook("custom:update_check:update", version)
         }
       } catch (err) {
         console.error("Failed to check for updates:", err)
@@ -42,8 +42,11 @@ export default defineNuxtPlugin({
 
 async function retrieveRemoteVersion(path: string) {
   try {
-    const data = await $fetch<{ version?: string }>(path)
-    if (data?.version) {
+    const data = await $fetch<{ version?: string | number }>(path)
+    if (
+      typeof data?.version === "string" ||
+      typeof data?.version === "number"
+    ) {
       return data.version
     }
     throw new Error("Malformed version response.")

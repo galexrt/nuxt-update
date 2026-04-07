@@ -33,8 +33,8 @@ Create `plugins/update.client.ts` with your own update handler:
 ```ts
 export default defineNuxtPlugin({
   hooks: {
-    'updateCheck:update': async (version) => {
-      // TODO: Use some fancy toast library.
+    'custom:update_check:update': async (version) => {
+      // TODO use some fancy toast library.
       if (confirm(`New version ${version} available. Update?`)) {
         location.reload()
       }

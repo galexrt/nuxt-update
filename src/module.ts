@@ -6,8 +6,10 @@ import {
 } from "@nuxt/kit"
 import type { HookResult } from "@nuxt/schema"
 
+export type UpdateVersion = string | number
+
 export interface ModuleRuntimeHooks {
-  "updateCheck:update": (version: unknown) => HookResult
+  "custom:update_check:update": (version: UpdateVersion) => HookResult
 }
 
 export interface ModuleOptions {
@@ -31,6 +33,11 @@ export interface ModuleOptions {
    * If not provided, no update checks will be performed.
    */
   version: string | number | null
+}
+
+declare module "#app" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  interface RuntimeNuxtHooks extends ModuleRuntimeHooks {}
 }
 
 export default defineNuxtModule<ModuleOptions>({
