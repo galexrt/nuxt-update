@@ -35,11 +35,6 @@ export interface ModuleOptions {
   version: string | number | null
 }
 
-declare module "#app" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-  interface RuntimeNuxtHooks extends ModuleRuntimeHooks {}
-}
-
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: "nuxt-update",

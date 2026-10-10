@@ -1,4 +1,5 @@
 {
   "private": true,
-  "name": "nuxt-update-playground"
+  "name": "nuxt-update-playground",
+  "type": "module"
 }
